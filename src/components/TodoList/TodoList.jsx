@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import AddTodo from "../AddTodo/AddTodo";
+import Todo from "../Todo/Todo";
 
 export default function TodoList() {
   const [todos, setTodos] = useState([
@@ -12,12 +13,22 @@ export default function TodoList() {
     setTodos(prev => [...prev, todo]);
   }
 
+
+  const handleDelete = (deleted) => {
+    setTodos(prev => prev.filter(todo => todo.id !== deleted.id));
+  }
+
+  const handleUpdate = (updated) => {
+    setTodos(prev => prev.map(todo => todo.id === updated.id ? updated : todo));
+  }
+
   return (
     <>
     <section>
       <ul>
         {todos.map((todo) => (
-          <li key={todo.id}>{todo.content}</li>
+          <Todo key={todo.id} todo={todo} onUpdate={handleUpdate} onDelete={handleDelete}/>
+          // <li key={todo.id}><Checkbox onChecked={handleChecked} todo={todo}/>{todo.content}<button onClick={handleDelete} value={todo.id}>삭제</button></li>
         ))}
       </ul>
     </section>
