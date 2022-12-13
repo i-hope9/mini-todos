@@ -1,5 +1,6 @@
 import React from "react";
 import {TbTrashX} from "react-icons/tb";
+import styles from "./Todo.module.css"
 
 export default function Todo( {todo, onUpdate, onDelete} ) {
     const {content, status} = todo;
@@ -12,10 +13,10 @@ export default function Todo( {todo, onUpdate, onDelete} ) {
         onDelete(todo);
     }
     return (
-        <li>
-            <input type='checkbox' id='checkbox' checked={status === 'completed'} onChange={handleChange}></input>
-            <label htmlFor='checkbox'>{content}</label>
-            <button onClick={handleDelete}><TbTrashX /></button>
+        <li className={styles.todo}>
+            <input className={styles.checkbox} type='checkbox' id='checkbox' checked={status === 'completed'} onChange={handleChange}></input>
+            <label className={styles.text} htmlFor='checkbox'>{content}</label>
+            <span className={styles.icon}><button className={styles.button} onClick={handleDelete}><TbTrashX /></button></span>
         </li>
     )
 }

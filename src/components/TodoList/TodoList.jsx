@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import AddTodo from "../AddTodo/AddTodo";
 import Todo from "../Todo/Todo";
+import styles from "./TodoList.module.css"
 
 export default function TodoList({ filter }) {
   const [todos, setTodos] = useState([
@@ -25,16 +26,16 @@ export default function TodoList({ filter }) {
 
   return (
     <>
-    <section>
-      <ul>
+    <section className={styles.container}>
+      <ul className={styles.list}>
         {filteredTodos.map((todo) => (
           <Todo key={todo.id} todo={todo} onUpdate={handleUpdate} onDelete={handleDelete}/>
           // <li key={todo.id}><Checkbox onChecked={handleChecked} todo={todo}/>{todo.content}<button onClick={handleDelete} value={todo.id}>삭제</button></li>
         ))}
       </ul>
+      <AddTodo onAdd={handleAdd}></AddTodo> {/* 이벤트가 발생했을 때 나에게 알려줄 콜백 함수를 지정 */}
     </section>
     {/* <AddTodo todos={todos} setTodos={setTodos}></AddTodo> */}
-    <AddTodo onAdd={handleAdd}></AddTodo> {/* 이벤트가 발생했을 때 나에게 알려줄 콜백 함수를 지정 */}
     </>
   );
 }
